@@ -1,0 +1,22 @@
+{
+  "name": "express",
+  "version": "1.0.0",
+  "description": "puppeter",
+  "main": "app.js",
+  "type": "module",
+  "dependencies": {
+    "bull": "^4.12.2",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "p-queue": "^8.0.1",
+    "puppeteer": "^22.8.0",
+    "puppeteer-cluster": "^0.24.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ilham",
+  "license": "ISC"
+}

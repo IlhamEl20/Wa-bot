@@ -1,0 +1,24 @@
+2024/05/17-16:29:23.142 3de0 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/17-16:29:23.147 3de0 Recovering log #174
+2024/05/17-16:29:23.166 3de0 Reusing old log C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000174.log 
+2024/05/17-16:29:23.677 290c Level-0 table #180: started
+2024/05/17-16:29:23.689 290c Level-0 table #180: 175235 bytes OK
+2024/05/17-16:29:23.691 290c Delete type=0 #174
+2024/05/17-16:29:23.692 3de0 Manual compaction at level-0 from '\x00?\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00@\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/05/17-16:29:23.694 4578 Level-0 table #182: started
+2024/05/17-16:29:23.708 4578 Level-0 table #182: 503 bytes OK
+2024/05/17-16:29:23.710 4578 Delete type=0 #179
+2024/05/17-16:29:23.711 290c Manual compaction at level-0 from '\x00@\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00A\x00\x00\x00' @ 0 : 0; will stop at '\x00@\x00\x00\x05' @ 192804 : 0
+2024/05/17-16:29:23.711 290c Compacting 1@0 + 1@1 files
+2024/05/17-16:29:23.724 290c Generated table #183@0: 3548 keys, 76626 bytes
+2024/05/17-16:29:23.724 290c Compacted 1@0 + 1@1 files => 76626 bytes
+2024/05/17-16:29:23.725 290c compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/05/17-16:29:23.726 290c Delete type=2 #182
+2024/05/17-16:29:23.727 49e4 Manual compaction at level-0 from '\x00@\x00\x00\x05' @ 192804 : 0 .. '\x00A\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/05/17-16:29:25.780 54d0 Compacting 1@1 + 1@2 files
+2024/05/17-16:29:25.898 54d0 Generated table #184@1: 41855 keys, 1601622 bytes
+2024/05/17-16:29:25.898 54d0 Compacted 1@1 + 1@2 files => 1601622 bytes
+2024/05/17-16:29:25.899 54d0 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/05/17-16:29:25.900 54d0 Delete type=2 #177
+2024/05/17-16:29:25.900 54d0 Delete type=2 #180
+2024/05/17-16:29:25.900 54d0 Delete type=2 #183

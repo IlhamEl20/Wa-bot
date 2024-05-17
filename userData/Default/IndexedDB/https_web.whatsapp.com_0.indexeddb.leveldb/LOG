@@ -1,0 +1,26 @@
+2024/05/17-16:29:35.394 5508 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/05/17-16:29:35.395 5508 Recovering log #181
+2024/05/17-16:29:35.404 5508 Reusing old log C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000181.log 
+2024/05/17-16:29:36.813 c40 Level-0 table #187: started
+2024/05/17-16:29:36.822 c40 Level-0 table #187: 103617 bytes OK
+2024/05/17-16:29:36.825 c40 Delete type=0 #181
+2024/05/17-16:29:36.827 2a10 Manual compaction at level-0 from '\x00A\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00B\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/05/17-16:29:36.829 46c8 Level-0 table #189: started
+2024/05/17-16:29:36.842 46c8 Level-0 table #189: 436 bytes OK
+2024/05/17-16:29:36.844 46c8 Delete type=0 #186
+2024/05/17-16:29:36.845 5508 Manual compaction at level-0 from '\x00B\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00C\x00\x00\x00' @ 0 : 0; will stop at '\x00B\x00\x00\x05' @ 196925 : 0
+2024/05/17-16:29:36.845 5508 Compacting 1@0 + 1@1 files
+2024/05/17-16:29:36.855 5508 Generated table #190@0: 2404 keys, 51752 bytes
+2024/05/17-16:29:36.856 5508 Compacted 1@0 + 1@1 files => 51752 bytes
+2024/05/17-16:29:36.857 5508 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/05/17-16:29:36.857 5508 Delete type=2 #189
+2024/05/17-16:29:36.858 5adc Manual compaction at level-0 from '\x00B\x00\x00\x05' @ 196925 : 0 .. '\x00C\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/05/17-16:29:38.940 5dcc Compacting 1@1 + 1@2 files
+2024/05/17-16:29:39.068 5dcc Generated table #191@1: 42317 keys, 1613953 bytes
+2024/05/17-16:29:39.069 5dcc Compacted 1@1 + 1@2 files => 1613953 bytes
+2024/05/17-16:29:39.070 5dcc compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/05/17-16:29:39.070 5dcc Delete type=2 #184
+2024/05/17-16:29:39.070 5dcc Delete type=2 #187
+2024/05/17-16:29:39.071 5dcc Delete type=2 #190
+2024/05/17-16:29:43.812 5b88 Manual compaction at level-0 from '\x00C\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00D\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/05/17-16:29:43.814 48e4 Manual compaction at level-0 from '\x00D\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00E\x00\x00\x00' @ 0 : 0; will stop at (end)
