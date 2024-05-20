@@ -1,2 +1,5 @@
 /node_modules
 /May.py
+
+/env
+.env
