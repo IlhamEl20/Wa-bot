@@ -1,4 +1,4 @@
-import { sendMessage } from "../componen/sendMessage.js";
+import { sendMessage } from "../component/sendMessage.js";
 import PQueue from "p-queue";
 
 let messageList = [];

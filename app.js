@@ -2,9 +2,9 @@ import express from "express";
 import "dotenv/config";
 import apiRouter from "./routes/api.js";
 import fs from "fs";
-import { initializePuppeteer } from "./componen/sendMessage.js";
+import { initializePuppeteer } from "./component/sendMessage.js";
 import rateLimit from "express-rate-limit";
-import { initializeCluster } from "./componen/cluster.js";
+import { initializeCluster } from "./component/cluster.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,7 +22,10 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // initializePuppeteer();
+
+//broadcast
 initializeCluster();
+
 // Route to send message
 app.use("/", apiRouter);
 // Fungsi untuk mengirim pesan menggunakan Puppeteer

@@ -1,5 +1,5 @@
 import { Cluster } from "puppeteer-cluster";
-import { addUrlsToQueue } from "../componen/cluster.js";
+import { addUrlsToQueue } from "../component/cluster.js";
 
 class BroadCast {
   async Store(req, res) {
