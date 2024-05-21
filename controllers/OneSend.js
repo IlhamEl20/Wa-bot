@@ -6,7 +6,7 @@ const messageQueue = new PQueue({ concurrency: 1 });
 
 class OneSend {
   async store(req, res) {
-    const { recipient, message } = req.body;
+    let { recipient, message } = req.body;
     if (!recipient || !message) {
       // Jika ada data yang tidak lengkap, kirim respons dengan pesan error
       return res.status(400).json({
@@ -14,9 +14,9 @@ class OneSend {
         message: "Recipient and message are required",
       });
     }
+    recipient = PhoneID(recipient);
     // Tambahkan pesan ke dalam array pesan
     messageList.push({ recipient, message });
-    console.log(messageList);
 
     // Kirim pesan ke dalam antrian
     const sendResult = await messageQueue.add(() => {
