@@ -50,11 +50,6 @@ export async function sendMessage(recipient, message) {
     // );
     await page.waitForSelector("._ak1r", { timeout: 10000 });
 
-    // const element = await page.$("._ak1r");
-    // if (!element) {
-    //   throw new Error("No valid element found");
-    // }
-
     await page.type("._ak1l > div:nth-child(1) > div:nth-child(1)", message);
     await page.keyboard.press("Enter");
 

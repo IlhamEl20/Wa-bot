@@ -21,10 +21,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// initializePuppeteer();
+//one send one
+initializePuppeteer();
 
 //broadcast
-initializeCluster();
+// initializeCluster();
 
 // Route to send message
 app.use("/", apiRouter);
