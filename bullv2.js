@@ -19,42 +19,6 @@ const urls = [
   `https://web.whatsapp.com/send?phone=${recipientNumber}&text=${encodedMessage}`, // Nomor salah
   `https://web.whatsapp.com/send?phone=${recipientNumber}&text=${encodedMessage}`, // Nomor benar 2
 ];
-console.log(urls);
-
-// (async () => {
-//   browser = await puppeteer.launch({
-//     headless: false,
-//     userDataDir: "./userData",
-//   });
-//   page = await browser.newPage();
-
-//   const sessionFile = "./userData/Session.json";
-//   const sessionExists = fs.existsSync(sessionFile);
-
-//   if (sessionExists) {
-//     const sessionData = fs.readFileSync(sessionFile);
-//     const session = JSON.parse(sessionData);
-//     await page.evaluateOnNewDocument((session) => {
-//       localStorage.setItem("WABrowserId", session.WABrowserId);
-//       localStorage.setItem("WASecretBundle", session.WASecretBundle);
-//       localStorage.setItem("WAToken1", session.WAToken1);
-//       localStorage.setItem("WAToken2", session.WAToken2);
-//     }, session);
-//   } else {
-//     await page.goto("https://web.whatsapp.com");
-//     console.log("Scan the QR code to login");
-//   }
-
-//   browser.on("disconnected", () => {
-//     const session = {
-//       WABrowserId: localStorage.getItem("WABrowserId"),
-//       WASecretBundle: localStorage.getItem("WASecretBundle"),
-//       WAToken1: localStorage.getItem("WAToken1"),
-//       WAToken2: localStorage.getItem("WAToken2"),
-//     };
-//     fs.writeFileSync(sessionFile, JSON.stringify(session));
-//   });
-// })();
 
 app.use(express.json());
 
@@ -92,13 +56,7 @@ await cluster.task(async ({ page, data: url }) => {
       "#app > div > span:nth-child(3) > div > span > div > div > div > div > div",
       { timeout: 500 }
     );
-    // await page.waitForSelector(".xuk3077"); // Menunggu tombol muncul
-    // await new Promise((resolve) => setTimeout(resolve, 2000)); // Misalnya tunggu 8 detik
 
-    // const button = await page.click(".xuk3077 > button:nth-child(1)"); // Klik tombol
-    // await new Promise((resolve) => setTimeout(resolve, 2000)); // Misalnya tunggu 8 detik
-
-    // if (!button) {
     await page.waitForSelector("._ak1r");
 
     await new Promise((resolve) => setTimeout(resolve, 2000)); // Misalnya tunggu 8 detik

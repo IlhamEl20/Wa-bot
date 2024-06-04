@@ -9,6 +9,8 @@ import { initializeCluster } from "./component/cluster.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+const running =
+  process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 
 // limit all request
 const limiter = rateLimit({
@@ -22,11 +24,17 @@ const limiter = rateLimit({
 app.use(limiter);
 
 //one send one
-initializePuppeteer();
+// initializePuppeteer();
 
-//broadcast
+// //broadcast
 // initializeCluster();
-
+(async () => {
+  try {
+    await running();
+  } catch (error) {
+    console.error("Error executing the function:", error);
+  }
+})();
 // Route to send message
 app.use("/", apiRouter);
 // Fungsi untuk mengirim pesan menggunakan Puppeteer

@@ -13,25 +13,15 @@ export async function initializePuppeteer() {
   await page.setUserAgent(
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
   );
-  // Cek apakah sudah ada sesi yang tersimpan
-  const sessionFile = "./userData/Session.json";
-  const sessionExists = fs.existsSync(sessionFile);
-
-  // Jika ada sesi yang tersimpan, gunakan sesi tersebut
-  if (sessionExists) {
-    const sessionData = fs.readFileSync(sessionFile);
-    const session = JSON.parse(sessionData);
-    await page.evaluateOnNewDocument((session) => {
-      localStorage.setItem("WABrowserId", session.WABrowserId);
-      localStorage.setItem("WASecretBundle", session.WASecretBundle);
-      localStorage.setItem("WAToken1", session.WAToken1);
-      localStorage.setItem("WAToken2", session.WAToken2);
-    }, session);
-    await page.goto("https://web.whatsapp.com");
-  } else {
-    // Jika tidak ada sesi yang tersimpan, buka WhatsApp Web
-    await page.goto("https://web.whatsapp.com");
-    console.log("Scan the QR code to login");
+  await page.goto("https://web.whatsapp.com");
+  // console.log("Scan the QR code to login");
+  const qrCodeSelector =
+    "#app > div > div.landing-wrapper > div.landing-window > div.landing-main > div > div > div._ak96 > div";
+  try {
+    await page.waitForSelector(qrCodeSelector, { timeout: 15000 }); // Wait for up to 15 seconds
+    console.log("WA WEB dalam keadaan belum login");
+  } catch (error) {
+    console.log("WA WEB dalam keadaan login");
   }
 }
 
