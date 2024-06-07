@@ -1,3 +1,14 @@
-2024/06/04-09:42:35.450 5dc8 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/MANIFEST-000001
-2024/06/04-09:42:35.453 5dc8 Recovering log #7
-2024/06/04-09:42:35.457 5dc8 Reusing old log C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/000007.log 
+2024/06/05-14:52:37.682 3f6c Reusing MANIFEST C:\BLJR_KP\express\userdata\Default\Local Storage\leveldb/MANIFEST-000001
+2024/06/05-14:52:37.686 3f6c Recovering log #17
+2024/06/05-14:52:37.687 3f6c Level-0 table #19: started
+2024/06/05-14:52:37.697 3f6c Level-0 table #19: 12787 bytes OK
+2024/06/05-14:52:37.704 3f6c Delete type=0 #17
+2024/06/05-14:52:37.706 584c Compacting 4@0 + 1@1 files
+2024/06/05-14:52:37.717 584c Generated table #21@0: 111 keys, 7002 bytes
+2024/06/05-14:52:37.717 584c Compacted 4@0 + 1@1 files => 7002 bytes
+2024/06/05-14:52:37.718 584c compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/06/05-14:52:37.720 584c Delete type=2 #8
+2024/06/05-14:52:37.720 584c Delete type=2 #10
+2024/06/05-14:52:37.720 584c Delete type=2 #13
+2024/06/05-14:52:37.720 584c Delete type=2 #16
+2024/06/05-14:52:37.721 584c Delete type=2 #19

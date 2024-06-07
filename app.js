@@ -9,8 +9,8 @@ import { initializeCluster } from "./component/cluster.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-const running =
-  process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
+// const running =
+//   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 
 // limit all request
 const limiter = rateLimit({
@@ -24,7 +24,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 //one send one
-// initializePuppeteer();
+initializePuppeteer();
 
 // //broadcast
 // initializeCluster();

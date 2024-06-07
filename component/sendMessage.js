@@ -39,7 +39,7 @@ export async function sendMessage(recipient, message) {
     //   "#app > div > span:nth-child(3) > div > span > div > div > div > div > div"
     // );
     await page.waitForSelector("._ak1r", { timeout: 10000 });
-
+    console.log("lagi ngetik");
     await page.type("._ak1l > div:nth-child(1) > div:nth-child(1)", message);
     await page.keyboard.press("Enter");
 

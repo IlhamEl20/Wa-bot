@@ -12,7 +12,7 @@ let messageList = [];
 const messageQueue = [];
 
 const recipientNumber = "6281279407408"; // Nomor yang salah
-const messageText = "pesan1 ni";
+const messageText = "hi ni pesan 2";
 const encodedMessage = encodeURIComponent(messageText);
 
 const urls = [
