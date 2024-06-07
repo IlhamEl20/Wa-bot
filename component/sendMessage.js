@@ -7,6 +7,7 @@ export async function initializePuppeteer() {
   browser = await puppeteer.launch({
     headless: true, // Set headless menjadi false untuk melihat jendela browser
     userDataDir: "./userData", // Lokasi penyimpanan data pengguna (termasuk sesi)
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   page = await browser.newPage();
 
