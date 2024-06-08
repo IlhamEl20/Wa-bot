@@ -42,17 +42,18 @@ export async function sendMessage(recipient, message) {
     await page.waitForSelector("._ak1r", { timeout: 10000 });
     console.log("lagi ngetik");
     await page.type("._ak1l > div:nth-child(1) > div:nth-child(1)", message);
+
     await page.keyboard.press("Enter");
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return { status: "success", message: "Message sent successfully" };
   } catch (error) {
-    if (
-      error.message ===
-      "Waiting for selector `._ak1r` failed: Waiting failed: 15000ms exceeded"
-    ) {
-      return { status: "error", message: "Nomor Tidak Valid" };
+    if (error.message.includes("Waiting for selector `._ak1r` failed")) {
+      return {
+        status: "error",
+        message: "Gagal mengirim pesan karena no WA tidak terdaftar",
+      };
     }
     return { status: "error", message: error.message };
   }

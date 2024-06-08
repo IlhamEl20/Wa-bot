@@ -1,8 +1,10 @@
 import { sendMessage } from "../component/sendMessage.js";
 import PQueue from "p-queue";
 import PhoneID from "../libraries/FromatPhone.js";
+import { v4 as uuidv4 } from "uuid";
 
 let messageList = [];
+const messageStatus = {}; // Object to store the status of messages
 const messageQueue = new PQueue({ concurrency: 1 });
 
 class OneSend {
@@ -16,26 +18,51 @@ class OneSend {
       });
     }
     recipient = PhoneID(recipient);
+    const messageId = uuidv4(); // Generate a unique ID for the message
     // Tambahkan pesan ke dalam array pesan
-    messageList.push({ recipient, message });
-    console.log(messageList);
-    // Kirim pesan ke dalam antrian
-    const sendResult = await messageQueue.add(() => {
-      const { recipient, message } = messageList.shift(); // Ambil pesan pertama dari array
-      return sendMessage(recipient, message);
+    // messageList.push({ recipient, message });
+    messageList.push({ id: messageId, recipient, message });
+    // console.log(messageList);
+    messageStatus[messageId] = {
+      status: "queued",
+      // position: messageList.length,
+      message: message,
+    };
+    res.json({
+      status: "success",
+      message: `Your message is entered in the queue.`,
+      messageId,
     });
+    //
+    messageQueue.add(async () => {
+      const { id, recipient, message } = messageList.shift(); // Ambil pesan pertama dari array
+      messageStatus[id].status = "sending";
 
-    if (sendResult.status === "success") {
-      return res.json({
+      const sendResult = await sendMessage(recipient, message);
+
+      if (sendResult.status === "success") {
+        messageStatus[id].status = "sent";
+        messageStatus[id].message = message;
+      } else {
+        messageStatus[id].status = "failed";
+        messageStatus[id].error = sendResult.message;
+      }
+    });
+  }
+
+  async checkStatus(req, res) {
+    const { messageId } = req.params;
+    const status = messageStatus[messageId];
+
+    if (status) {
+      res.json({
         status: "success",
-        // message: "Message added to the queue",
-        sendResult: sendResult, // Jika perlu, kirim informasi hasil pengiriman pesan ke klien
+        messageStatus: status,
       });
     } else {
-      // Jika terjadi kesalahan saat mengirim pesan, kirim pesan error ke klien
-      return res.status(400).json({
+      res.status(404).json({
         status: "error",
-        message: sendResult.message,
+        message: "Message not found",
       });
     }
   }

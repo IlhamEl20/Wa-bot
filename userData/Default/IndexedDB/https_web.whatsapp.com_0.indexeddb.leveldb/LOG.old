@@ -1,27 +1,16 @@
-2024/06/08-13:11:24.485 6c1c Reusing MANIFEST C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/06/08-13:11:24.486 6c1c Recovering log #630
-2024/06/08-13:11:24.490 6c1c Reusing old log C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000630.log 
-2024/06/08-13:11:24.891 2150 Level-0 table #636: started
-2024/06/08-13:11:24.895 2150 Level-0 table #636: 105127 bytes OK
-2024/06/08-13:11:24.896 2150 Delete type=0 #630
-2024/06/08-13:11:24.897 4428 Manual compaction at level-0 from '\x00\xb2\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xb3\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/06/08-13:11:25.933 50d4 Compacting 1@1 + 2@2 files
-2024/06/08-13:11:26.009 50d4 Generated table #637@1: 77855 keys, 2237003 bytes
-2024/06/08-13:11:26.046 50d4 Generated table #638@1: 34570 keys, 1072042 bytes
-2024/06/08-13:11:26.046 50d4 Compacted 1@1 + 2@2 files => 3309045 bytes
-2024/06/08-13:11:26.047 50d4 compacted to: files[ 0 0 2 0 0 0 0 ]
-2024/06/08-13:11:26.047 50d4 Delete type=2 #632
-2024/06/08-13:11:26.047 50d4 Delete type=2 #633
-2024/06/08-13:11:26.047 50d4 Delete type=2 #636
-2024/06/08-13:11:33.288 3d50 Level-0 table #640: started
-2024/06/08-13:11:33.294 3d50 Level-0 table #640: 146415 bytes OK
-2024/06/08-13:11:33.295 3d50 Delete type=0 #635
-2024/06/08-13:11:33.295 3344 Manual compaction at level-0 from '\x00\xb3\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xb4\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/06/08-13:11:34.378 4260 Compacting 1@1 + 2@2 files
-2024/06/08-13:11:34.460 4260 Generated table #641@1: 78419 keys, 2242157 bytes
-2024/06/08-13:11:34.495 4260 Generated table #642@1: 34602 keys, 1082377 bytes
-2024/06/08-13:11:34.495 4260 Compacted 1@1 + 2@2 files => 3324534 bytes
-2024/06/08-13:11:34.495 4260 compacted to: files[ 0 0 2 0 0 0 0 ]
-2024/06/08-13:11:34.496 4260 Delete type=2 #637
-2024/06/08-13:11:34.496 4260 Delete type=2 #638
-2024/06/08-13:11:34.496 4260 Delete type=2 #640
+2024/06/08-19:38:06.390 11a0 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/06/08-19:38:06.391 11a0 Recovering log #813
+2024/06/08-19:38:06.415 11a0 Reusing old log C:\BLJR_KP\express\userData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000813.log 
+2024/06/08-19:38:07.984 2554 Level-0 table #819: started
+2024/06/08-19:38:07.997 2554 Level-0 table #819: 165100 bytes OK
+2024/06/08-19:38:07.999 2554 Delete type=0 #813
+2024/06/08-19:38:07.999 6b8c Manual compaction at level-0 from '\x00\xe8\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xe9\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/06/08-19:38:10.257 6a4 Compacting 1@1 + 2@2 files
+2024/06/08-19:38:10.442 6a4 Generated table #820@1: 87885 keys, 2237699 bytes
+2024/06/08-19:38:10.556 6a4 Generated table #821@1: 51804 keys, 1684792 bytes
+2024/06/08-19:38:10.556 6a4 Compacted 1@1 + 2@2 files => 3922491 bytes
+2024/06/08-19:38:10.557 6a4 compacted to: files[ 0 0 2 0 0 0 0 ]
+2024/06/08-19:38:10.558 6a4 Delete type=2 #815
+2024/06/08-19:38:10.558 6a4 Delete type=2 #816
+2024/06/08-19:38:10.558 6a4 Delete type=2 #819
+2024/06/08-19:38:20.475 11a0 Manual compaction at level-0 from '\x00\xe9\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\xea\x00\x00\x00' @ 0 : 0; will stop at (end)

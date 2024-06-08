@@ -8,7 +8,7 @@ const router = express.Router();
 // Limit per end point
 const messageLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 1, // Limit each IP to 1 request per minute
+  max: 2, // Limit each IP to 2 request per minute
   message: {
     status: "error",
     message: "Too many requests to send messages, please try again later.",
@@ -21,6 +21,7 @@ const messageLimiter = rateLimit({
  *   description: Endpoints for sending WhatsApp notifications
  */
 /**
+ *
  * @swagger
  * /send-message:
  *   post:
@@ -46,6 +47,31 @@ const messageLimiter = rateLimit({
  *         description: Too many requests
  */
 router.post("/send-message", messageLimiter, OneSend.store);
+
+/**
+ * @swagger
+ * /message-status/{messageId}:
+ *   get:
+ *     summary: Check the status of Send a message to a single recipient
+ *     tags: [WhatsApp Notifications]
+ *     parameters:
+ *       - in: path
+ *         name: messageId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the message
+ *     responses:
+ *       '200':
+ *         description: Message sent successfully
+ *       '400':
+ *         description: Bad request
+ *       '429':
+ *         description: Too many requests
+ */
+router.get("/message-status/:messageId", (req, res) =>
+  OneSend.checkStatus(req, res)
+);
 
 /**
  * @swagger
