@@ -4,4 +4,15 @@ const PhoneID = (phoneNumber) => {
   }
   return phoneNumber;
 };
+
 export default PhoneID;
+
+// export const ProcessPhoneNumbers = (data) => {
+//   return data.map((item) => {
+//     const processedNumbers = item.number.map(PhoneID);
+//     return {
+//       ...item,
+//       number: processedNumbers,
+//     };
+//   });
+// };

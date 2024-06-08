@@ -12,6 +12,7 @@ export const initializeCluster = async () => {
       headless: true,
       defaultViewport: false,
       userDataDir: "./userData",
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     },
   });
 
@@ -25,22 +26,21 @@ export const initializeCluster = async () => {
     }
   });
 
-  await cluster.task(async ({ page, data: url }) => {
+  await cluster.task(async ({ page, data: { recipient, url } }) => {
     try {
       await page.setUserAgent(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
       );
       await page.goto(url);
 
-      await page.waitForSelector(
-        "#app > div > span:nth-child(3) > div > span > div > div > div > div"
-      );
-      await page.waitForSelector(
-        "#app > div > span:nth-child(3) > div > span > div > div > div > div > div"
-      );
+      const isValidUser = await page.waitForSelector("._ak1r", {
+        timeout: 10000,
+      });
+      if (!isValidUser) {
+        throw new Error("Nomor WhatsApp tidak valid atau tidak terdaftar");
+      }
 
-      await page.waitForSelector("._ak1r");
-
+      console.log(`Sending message to ${recipient}`);
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
 
       await page.keyboard.press("Enter");
@@ -49,10 +49,14 @@ export const initializeCluster = async () => {
 
       return {
         status: "success",
-        message: `Message sent to ${nomor} successfully`,
+        message: `Message sent to ${recipient} successfully`,
       };
     } catch (error) {
-      return { status: "error", message: error.message };
+      console.error(`Error sending message to ${recipient}: ${error.message}`);
+      return {
+        status: "error",
+        message: `Failed to send message to ${recipient}: ${error.message}`,
+      };
     }
   });
 };
@@ -78,9 +82,16 @@ export const addUrlsToQueue = async (messages) => {
     const encodedText = encodeURIComponent(message);
     const url = `https://web.whatsapp.com/send?phone=${recipient}&text=${encodedText}`;
 
-    const result = await cluster.queue(url);
-
-    results.push({ recipient, result });
+    // results.push({ recipient, message, result })
+    const result = await cluster.execute({ recipient, url });
+    if (result.message.includes("Failed to send message to")) {
+      results.push({
+        recipient,
+        status: "Gagal mengirim pesan karena no WA tidak terdaftar",
+      });
+    } else {
+      results.push({ recipient, status: result.message });
+    }
   }
   await cluster.idle();
   await cluster.close();

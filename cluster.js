@@ -17,7 +17,8 @@ app.post("/send-messages", async (req, res) => {
     maxConcurrency: 4, // Adjust based on your system's capability
     monitor: true,
     puppeteerOptions: {
-      headless: false,
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     },
   });
 

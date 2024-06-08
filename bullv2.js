@@ -1,9 +1,6 @@
 import express from "express";
-import puppeteer from "puppeteer";
-import Queue from "bull";
-import PQueue from "p-queue";
+
 import { Cluster } from "puppeteer-cluster";
-import fs from "fs";
 
 const app = express();
 const PORT = 3000;
