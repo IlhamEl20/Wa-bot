@@ -10,8 +10,8 @@ import swaggerUi from "swagger-ui-express";
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
-const running =
-  process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
+// const running =
+//   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 
 // limit all request
 const limiter = rateLimit({
@@ -28,14 +28,14 @@ app.use(limiter);
 // initializePuppeteer();
 
 // //broadcast
-// initializeCluster();
-(async () => {
-  try {
-    await running();
-  } catch (error) {
-    console.error("Error executing the function:", error);
-  }
-})();
+initializeCluster();
+// (async () => {
+//   try {
+//     await running();
+//   } catch (error) {
+//     console.error("Error executing the function:", error);
+//   }
+// })();
 // Route to send message
 app.use("/", apiRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
