@@ -12,7 +12,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 // const running =
 //   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
-app.set("trust proxy", true);
+// app.set("trust proxy", true);
+
+app.set("trust proxy", ["loopback", "linklocal", "uniquelocal"]);
 // limit all request
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -23,7 +25,6 @@ const limiter = rateLimit({
   },
 });
 app.use(limiter);
-
 //one send one
 initializePuppeteer();
 
