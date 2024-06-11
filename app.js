@@ -14,7 +14,13 @@ app.use(express.json());
 //   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 // app.set("trust proxy", true);
 
-app.set("trust proxy", ["loopback", "linklocal", "uniquelocal"]);
+app.set("trust proxy", [
+  "loopback",
+  "linklocal",
+  "uniquelocal",
+  "wa.frhan.site",
+  "192.168.0.255",
+]);
 // limit all request
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
