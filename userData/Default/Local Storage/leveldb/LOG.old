@@ -1,3 +1,6 @@
-2024/06/10-10:00:31.724 e30 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/MANIFEST-000001
-2024/06/10-10:00:31.747 e30 Recovering log #70
-2024/06/10-10:00:31.753 e30 Reusing old log C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/000070.log 
+2024/06/11-10:38:31.386 21a8 Reusing MANIFEST C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/MANIFEST-000001
+2024/06/11-10:38:31.390 21a8 Recovering log #70
+2024/06/11-10:38:31.395 21a8 Reusing old log C:\BLJR_KP\express\userData\Default\Local Storage\leveldb/000070.log 
+2024/06/11-10:40:32.721 37b0 Level-0 table #73: started
+2024/06/11-10:40:32.739 37b0 Level-0 table #73: 10419 bytes OK
+2024/06/11-10:40:32.804 37b0 Delete type=0 #70
