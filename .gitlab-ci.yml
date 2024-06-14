@@ -1,0 +1,72 @@
+stages:
+  - build-image
+  - release-to-registry
+  - bridge
+
+variables:
+  IMAGE_NAME: svc-wa
+  DOCKER_DRIVER: overlay2
+  REGISTRY_URL: $REGISTRY_URL
+  REGISTRY_USER: $REGISTRY_LOGIN_USER
+  REGISTRY_PASS: $REGISTRY_LOGIN_PASS
+  ENV_FILE: $ENV_FILE
+  ENV_FILE_DEV: $ENV_FILE_DEV
+
+build:
+  tags:
+    - build
+  only:
+    - main
+    - dev
+  stage: build-image
+  script:
+    - >
+      if [ "$CI_COMMIT_BRANCH" == "main" ]; then 
+      cp $ENV_FILE .env; 
+      else 
+      cp $ENV_FILE_DEV .env; 
+      fi
+    - docker build -t $IMAGE_NAME .
+    - docker save -o myimage.tar "${IMAGE_NAME}:latest"
+  artifacts:
+    paths:
+      - myimage.tar
+    expire_in: 1 day
+
+publish-to-registry:
+  stage: release-to-registry
+  tags:
+    - publish
+  only:
+    - main
+    - dev
+  needs:
+    - build
+  script:
+    - docker load -i myimage.tar
+    - echo "$REGISTRY_PASS" | docker login -u "$REGISTRY_USER" "$REGISTRY_URL" --password-stdin
+    - >
+      if [ "$CI_COMMIT_BRANCH" == "main" ]; then 
+      docker tag "${IMAGE_NAME}:latest" "${REGISTRY_URL}/${IMAGE_NAME}:latest"; 
+      else 
+      docker tag "${IMAGE_NAME}:latest" "${REGISTRY_URL}/${IMAGE_NAME}-dev:latest"; 
+      fi
+    - >
+      if [ "$CI_COMMIT_BRANCH" == "main" ]; then 
+      docker push "${REGISTRY_URL}/${IMAGE_NAME}:latest"; 
+      else 
+      docker push "${REGISTRY_URL}/${IMAGE_NAME}-dev:latest"; 
+      fi
+
+bridging-to-another-pipeline:
+  stage: bridge
+  needs:
+    - publish-to-registry
+  only:
+    - main
+    - dev
+  trigger:
+    project: service-service/infra-things
+    branch: master
+    strategy: depend
+
