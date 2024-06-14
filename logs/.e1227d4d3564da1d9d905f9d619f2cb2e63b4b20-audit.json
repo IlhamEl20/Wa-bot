@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 7
+    },
+    "auditLog": "C:\\BLJR_KP\\express\\logs\\.e1227d4d3564da1d9d905f9d619f2cb2e63b4b20-audit.json",
+    "files": [
+        {
+            "date": 1718167100434,
+            "name": "C:\\BLJR_KP\\express\\logs\\application-2024-06-12.log",
+            "hash": "bcc577e6d043da6357ee73694a0449885e03690adf34284bcc646c5eeb0f8fa0"
+        },
+        {
+            "date": 1718358406032,
+            "name": "C:\\BLJR_KP\\express\\logs\\application-2024-06-14.log",
+            "hash": "efcaefe2fbc8458fb5250aa12ba72a89d123d616efc293de5ceb37a7ec28da9e"
+        }
+    ],
+    "hashType": "sha256"
+}

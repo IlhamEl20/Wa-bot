@@ -1,5 +1,6 @@
 import { Cluster } from "puppeteer-cluster";
 import PhoneID from "../libraries/FromatPhone.js";
+import logger from "../libraries/logger.js";
 
 let cluster;
 
@@ -89,8 +90,19 @@ export const addUrlsToQueue = async (messages) => {
         recipient,
         status: "Gagal mengirim pesan karena no WA tidak terdaftar",
       });
+      logger.error(`Failed to send message`, {
+        sentStatus: "failed",
+        recipient: recipient,
+        message: message,
+        error: "Gagal mengirim pesan karena no WA tidak terdaftar",
+      });
     } else {
       results.push({ recipient, status: result.message });
+      logger.info(`Success to send message`, {
+        sentStatus: "sent",
+        recipient: recipient,
+        message: message,
+      });
     }
   }
   await cluster.idle();

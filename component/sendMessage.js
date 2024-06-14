@@ -8,6 +8,7 @@ export async function initializePuppeteer() {
     headless: true, // Set headless menjadi false untuk melihat jendela browser
     userDataDir: "./userData", // Lokasi penyimpanan data pengguna (termasuk sesi)
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    protocolTimeout: 90000, //1+ menit
   });
   page = await browser.newPage();
 

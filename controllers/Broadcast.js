@@ -31,7 +31,7 @@ class BroadCast {
       recipient,
       message: messageText,
     }));
-    console.log(messages);
+
     BroadCastList.push({ messages });
     console.log(BroadCastList);
 

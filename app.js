@@ -13,16 +13,12 @@ app.use(express.json());
 const running =
   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 
-// app.set("trust proxy", [
-//   "loopback",
-//   "linklocal",
-//   "uniquelocal",
-// ]);
 app.set("trust proxy", process.env.TRUST_PROXY.split(","));
+
 // limit all request
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests
+  max: 200, // Limit each IP to 100 requests
   message: {
     status: "error",
     message: "Too many requests, please try again later.",
