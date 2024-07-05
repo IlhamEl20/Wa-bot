@@ -6,9 +6,9 @@
     "auditLog": "C:\\BLJR_KP\\express\\logs\\.5ccd206ec53ec2aa1f39c3384654b6d82950b2ea-audit.json",
     "files": [
         {
-            "date": 1718359435887,
-            "name": "C:\\BLJR_KP\\express\\logs\\application-2024-06-14.log",
-            "hash": "2c8fcc50a965fcd37fe6b4b260c96735b04ba8d09c2505d06516c41cc3e5f549"
+            "date": 1720163523220,
+            "name": "C:\\BLJR_KP\\express\\logs\\application-2024-07-05.log",
+            "hash": "85cfcd21866508c72df6e07e9aa98a0c2539065a108e076cf039e7e3bfa05778"
         }
     ],
     "hashType": "sha256"

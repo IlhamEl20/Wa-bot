@@ -34,14 +34,23 @@ export const initializeCluster = async () => {
       );
       await page.goto(url);
 
+      const qrCodeSelector =
+        "#app > div > div.landing-wrapper > div.landing-window > div.landing-main > div > div > div._ak96 > div";
+      const qrCodeElement = await page.$(qrCodeSelector); // Use page.$() to check for the element without throwing an error
+
+      if (qrCodeElement) {
+        throw new Error("WA WEB dalam keadaan belum login");
+      }
+
       const isValidUser = await page.waitForSelector("._ak1r", {
-        timeout: 10000,
+        timeout: 8000,
       });
+
       if (!isValidUser) {
         throw new Error("Nomor WhatsApp tidak valid atau tidak terdaftar");
       }
 
-      console.log(`Sending message to ${recipient}`);
+      // console.log(`Sending message to ${recipient}`);
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
 
       await page.keyboard.press("Enter");
@@ -50,42 +59,48 @@ export const initializeCluster = async () => {
 
       return {
         status: "success",
-        message: `Message sent to ${recipient} successfully`,
+        message: `Message sent to ${recipient.number} successfully`,
       };
     } catch (error) {
-      console.error(`Error sending message to ${recipient}: ${error.message}`);
+      console.log("line62", error);
       return {
         status: "error",
-        message: `Failed to send message to ${recipient}: ${error.message}`,
+        message: `${error.message}`,
       };
     }
   });
 };
 
 export const addUrlsToQueue = async (messages) => {
-  //   console.log(messages);
   const results = [];
   for (const msg of messages) {
     let { recipient, message } = msg;
+    const { name, number } = recipient;
+
     if (
-      !recipient ||
+      !name ||
+      !number ||
       !message ||
-      recipient.trim() === "" ||
+      number.trim() === "" ||
       message.trim() === ""
     ) {
       results.push({
-        recipient,
-        result: "Error: recipient or message is missing or empty",
+        recipient: { name, number },
+        result: "Error: recipient name, number or message is missing or empty",
       });
       continue;
     }
-    recipient = PhoneID(recipient);
+
+    const formattedNumber = PhoneID(number);
     const encodedText = encodeURIComponent(message);
-    const url = `https://web.whatsapp.com/send?phone=${recipient}&text=${encodedText}`;
+    const url = `https://web.whatsapp.com/send?phone=${formattedNumber}&text=${encodedText}`;
 
     // results.push({ recipient, message, result })
-    const result = await cluster.execute({ recipient, url });
-    if (result.message.includes("Failed to send message to")) {
+    const result = await cluster.execute({
+      recipient: { name, number: formattedNumber },
+      url,
+    });
+    if (result.message.includes("Waiting for selector `._ak1r` failed")) {
       results.push({
         recipient,
         status: "Gagal mengirim pesan karena no WA tidak terdaftar",
@@ -101,7 +116,7 @@ export const addUrlsToQueue = async (messages) => {
       logger.info(`Success to send message`, {
         sentStatus: "sent",
         recipient: recipient,
-        message: message,
+        message: result.message,
       });
     }
   }

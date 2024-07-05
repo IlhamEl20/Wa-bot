@@ -20,58 +20,59 @@ const messageLimiter = rateLimit({
  *   name: WhatsApp Notifications
  *   description: Endpoints for sending WhatsApp notifications
  */
-/**
- *
- * @swagger
- * /send-message:
- *   post:
- *     summary: Send a message to a single recipient
- *     tags: [WhatsApp Notifications]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               message:
- *                 type: string
- *               recipient:
- *                 type: string
- *     responses:
- *       '200':
- *         description: Message sent successfully
- *       '400':
- *         description: Bad request
- *       '429':
- *         description: Too many requests
- */
-router.post("/send-message", messageLimiter, OneSend.store);
 
-/**
- * @swagger
- * /message-status/{messageId}:
- *   get:
- *     summary: Check the status of Send a message to a single recipient
- *     tags: [WhatsApp Notifications]
- *     parameters:
- *       - in: path
- *         name: messageId
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the message
- *     responses:
- *       '200':
- *         description: Message sent successfully
- *       '400':
- *         description: Bad request
- *       '429':
- *         description: Too many requests
- */
-router.get("/message-status/:messageId", (req, res) =>
-  OneSend.checkStatus(req, res)
-);
+// /**
+//  *
+//  * @swagger
+//  * /send-message:
+//  *   post:
+//  *     summary: Send a message to a single recipient
+//  *     tags: [WhatsApp Notifications]
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             type: object
+//  *             properties:
+//  *               message:
+//  *                 type: string
+//  *               recipient:
+//  *                 type: string
+//  *     responses:
+//  *       '200':
+//  *         description: Message sent successfully
+//  *       '400':
+//  *         description: Bad request
+//  *       '429':
+//  *         description: Too many requests
+//  */
+// router.post("/send-message", messageLimiter, OneSend.store);
+
+// /**
+//  * @swagger
+//  * /message-status/{messageId}:
+//  *   get:
+//  *     summary: Check the status of Send a message to a single recipient
+//  *     tags: [WhatsApp Notifications]
+//  *     parameters:
+//  *       - in: path
+//  *         name: messageId
+//  *         schema:
+//  *           type: string
+//  *         required: true
+//  *         description: The ID of the message
+//  *     responses:
+//  *       '200':
+//  *         description: Message sent successfully
+//  *       '400':
+//  *         description: Bad request
+//  *       '429':
+//  *         description: Too many requests
+//  */
+// router.get("/message-status/:messageId", (req, res) =>
+//   OneSend.checkStatus(req, res)
+// );
 
 /**
  * @swagger
@@ -86,20 +87,81 @@ router.get("/message-status/:messageId", (req, res) =>
  *           schema:
  *             type: object
  *             properties:
- *               recipientNumbers:
+ *               recipients:
  *                 type: array
  *                 items:
- *                   type: string
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     number:
+ *                       type: string
  *               messageText:
  *                 type: string
+ *             required:
+ *               - recipients
+ *               - messageText
  *     responses:
  *       '200':
  *         description: Message broadcasted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 idBroadcast:
+ *                   type: string
+ *                 recipients:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       name:
+ *                         type: string
+ *                       number:
+ *                         type: string
+ *                 messageText:
+ *                   type: string
  *       '400':
  *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 message:
+ *                   type: string
  *       '429':
  *         description: Too many requests
  */
 router.post("/broadcast", messageLimiter, Broadcast.Store);
 
+/**
+ * @swagger
+ * /broadcast-status/{idBroadcast}:
+ *   get:
+ *     summary: Check the status of Broadcast
+ *     tags: [WhatsApp Notifications]
+ *     parameters:
+ *       - in: path
+ *         name: idBroadcast
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the message
+ *     responses:
+ *       '200':
+ *         description: Message sent successfully
+ *       '400':
+ *         description: Bad request
+ *       '429':
+ *         description: Too many requests
+ */
+router.get("/broadcast-status/:idBroadcast", (req, res) =>
+  Broadcast.checkStatus(req, res)
+);
 export default router;
