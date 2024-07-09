@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_NAME: ${{ github.repository_owner }}/$(echo ${{ github.repository.name }} | tr '[:upper:]' '[:lower:]')
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -29,7 +32,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ toLower(github.repository.name) }}:latest
+          tags: ghcr.io/${{ env.IMAGE_NAME }}:latest
 
       - name: Post build cleanup
         run: docker system prune -f
