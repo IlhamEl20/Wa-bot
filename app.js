@@ -6,10 +6,12 @@ import rateLimit from "express-rate-limit";
 import { initializeCluster } from "./component/cluster.js";
 import swaggerSpec from "./swagger.js";
 import swaggerUi from "swagger-ui-express";
+import ipLogger from "./libraries/loggerIP.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // const running =
 //   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
 
@@ -38,6 +40,21 @@ initializeCluster();
 //     console.error("Error executing the function:", error);
 //   }
 // })();
+
+// Use app.all to log IP and accessed endpoint for all routes
+app.all(["/broadcast", "/broadcast-status*"], (req, res, next) => {
+  console.log("Logging middleware hit for:", req.originalUrl); // Debug log
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  const endpoint = req.originalUrl;
+  const method = req.method;
+  const payload = req.body;
+  ipLogger.info(
+    `IP: ${ip} accessed Endpoint: ${endpoint} with Method: ${method} Payload: ${JSON.stringify(
+      payload
+    )}`
+  );
+  next();
+});
 // Route to send message
 app.use("/", apiRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
