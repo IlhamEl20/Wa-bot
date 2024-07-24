@@ -49,10 +49,11 @@ export const initializeCluster = async () => {
       if (!isValidUser) {
         throw new Error("Nomor WhatsApp tidak valid atau tidak terdaftar");
       }
+      // Buat delay acak antara 15-35 detik
+      const delay = Math.floor(Math.random() * 20000) + 15000;
+      await new Promise((resolve) => setTimeout(resolve, delay));
 
       // console.log(`Sending message to ${recipient}`);
-      await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
-
       await page.keyboard.press("Enter");
 
       await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
