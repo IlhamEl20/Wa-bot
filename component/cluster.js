@@ -10,10 +10,10 @@ export const initializeCluster = async () => {
     concurrency: Cluster.CONCURRENCY_PAGE,
     maxConcurrency: 1,
     monitor: true,
-    timeout: 60000, // Set timeout for cluster (3 minutes)
+    timeout: 180000, // Set timeout for cluster (3 minutes)
     puppeteerOptions: {
       timeout: 80000,
-      headless: false,
+      headless: true,
       defaultViewport: false,
       userDataDir: "./userData",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
