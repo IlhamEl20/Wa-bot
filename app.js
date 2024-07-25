@@ -7,16 +7,32 @@ import { initializeCluster } from "./component/cluster.js";
 import swaggerSpec from "./swagger.js";
 import swaggerUi from "swagger-ui-express";
 import ipLogger from "./libraries/loggerIP.js";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// const running =
-//   process.env.RUNNING === "1" ? initializePuppeteer : initializeCluster();
-
+//trust proxy
 app.set("trust proxy", process.env.TRUST_PROXY.split(","));
-
+// cors
+const allowedOrigins = process.env.CORS_ORIGIN.split(",");
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Memeriksa apakah origin yang diminta ada dalam daftar domain yang diizinkan
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        origin.startsWith("http://localhost")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Origin not allowed by CORS"));
+      }
+    },
+  })
+);
 // limit all request
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
