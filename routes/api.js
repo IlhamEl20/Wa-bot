@@ -8,7 +8,7 @@ const router = express.Router();
 // Limit per end point
 const messageLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 2, // Limit each IP to 2 request per minute
+  max: 20, // Limit each IP to 2 request per minute
   message: {
     status: "error",
     message: "Too many requests to send messages, please try again later.",
