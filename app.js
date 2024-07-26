@@ -58,7 +58,7 @@ initializeCluster();
 // })();
 
 // Use app.all to log IP and accessed endpoint for all routes
-app.all(["/broadcast", "/broadcast-status*"], (req, res, next) => {
+app.all(["/broadcast", "/broadcast-status*", "/v2/*"], (req, res, next) => {
   console.log("Logging middleware hit for:", req.originalUrl); // Debug log
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   const endpoint = req.originalUrl;
