@@ -2,6 +2,7 @@ import { Cluster } from "puppeteer-cluster";
 import { addUrlsToQueue } from "../component/cluster.js";
 import PQueue from "p-queue";
 import { v4 as uuidv4 } from "uuid";
+import PhoneID from "../libraries/FromatPhone.js";
 
 let BroadCastList = [];
 const broadcastStatus = {}; // Object to store the status of broadcasts
@@ -35,7 +36,7 @@ class BroadCast {
     }
     const idBroadcast = uuidv4(); // Generate a unique ID for the broadcast
     const messages = recipients.map(({ name, number }) => ({
-      recipient: { name, number },
+      recipient: { name, number: PhoneID(number) },
       message: messageText,
     }));
 

@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
+import PhoneID from "../libraries/FromatPhone.js";
 
 // Extend dayjs with the necessary plugins
 dayjs.extend(customParseFormat);
@@ -62,7 +63,7 @@ class BroadCastV2 {
 
     const idBroadcast = uuidv4(); // Generate a unique ID for the broadcast
     const messages = recipients.map(({ name, number }) => ({
-      recipient: { name, number },
+      recipient: { name, number: PhoneID(number) },
       message: messageText,
     }));
 
@@ -76,7 +77,7 @@ class BroadCastV2 {
       messages,
       scheduledTime: scheduleDate.format(), // Initialize status with the formatted string
     }; // Initialize status
-    console.log(JSON.stringify(BroadCastList, null, 2));
+    // console.log(JSON.stringify(BroadCastList, null, 2));
 
     // Respond immediately with the broadcast ID and input details
     res.json({
