@@ -115,7 +115,7 @@ export const addUrlsToQueue = async (messages) => {
       continue;
     }
 
-    const formattedNumber = PhoneID(number);
+    const formattedNumber = await PhoneID(number);
     const encodedText = encodeURIComponent(message);
     const url = `https://web.whatsapp.com/send?phone=${formattedNumber}&text=${encodedText}`;
 
