@@ -50,7 +50,7 @@ class BroadCastV2 {
     if (scheduledTime === "now") {
       scheduleDate = dayjs().tz(WIB);
     } else {
-      scheduleDate = dayjs(scheduledTime);
+      scheduleDate = dayjs(scheduledTime).tz(WIB);
       if (!scheduleDate.isValid()) {
         return res.status(400).json({
           status: "error",
