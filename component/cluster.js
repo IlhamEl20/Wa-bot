@@ -124,6 +124,7 @@ export const addUrlsToQueue = async (messages) => {
       recipient: { name, number: formattedNumber },
       url,
     });
+    console.log(result);
     if (result.message.includes("Waiting for selector `._ak1r` failed")) {
       results.push({
         recipient,
