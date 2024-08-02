@@ -44,7 +44,7 @@ export const initializeCluster = async () => {
       await page.setUserAgent(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
       );
-      await page.goto(url);
+      await page.goto(url, { waitUntil: "networkidle2" });
 
       const qrCodeSelector =
         "#app > div > div.landing-wrapper > div.landing-window > div.landing-main > div > div > div._ak96 > div";
