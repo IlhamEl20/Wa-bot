@@ -33,9 +33,9 @@ export const initializeCluster = async () => {
   await cluster.task(async ({ page, data: { recipient, url } }) => {
     try {
       // Set default timeout for all operations on this page
-      // const defaultTimeout = parseInt(process.env.DEFAULT_TIMEOUT) || 80000; // Default 60 seconds
-      // page.setDefaultTimeout(defaultTimeout);
-      // page.setDefaultNavigationTimeout(defaultTimeout);
+      const defaultTimeout = parseInt(process.env.DEFAULT_TIMEOUT) || 80000; // Default 60 seconds
+      page.setDefaultTimeout(defaultTimeout);
+      page.setDefaultNavigationTimeout(defaultTimeout);
       // console.log(page.getDefaultTimeout());
       // console.log(`Default Timeout: ${page._timeoutSettings._defaultTimeout}`);
       // console.log(
@@ -54,13 +54,37 @@ export const initializeCluster = async () => {
         throw new Error("WA WEB dalam keadaan belum login");
       }
 
-      const isValidUser = await page.waitForSelector("._ak1r", {
-        timeout: 8000,
-      });
+      const maxRetries = 3; // Number of retries
+      const retryDelay = 5000; // Delay between retries in milliseconds (5 seconds)
+      let isValidUser = null;
 
-      if (!isValidUser) {
-        throw new Error("Nomor WhatsApp tidak valid atau tidak terdaftar");
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          isValidUser = await page.waitForSelector("._ak1r", {
+            timeout: 8000,
+          });
+          if (isValidUser) {
+            break; // Break the loop if the selector is found
+          }
+        } catch (err) {
+          console.log(`Attempt ${i + 1} failed. Retrying...`);
+          if (i < maxRetries - 1) {
+            await new Promise((resolve) => setTimeout(resolve, retryDelay)); // Wait before retrying
+          } else {
+            throw new Error(
+              "Selector '._ak1r' not found after maximum retries"
+            );
+          }
+        }
       }
+
+      // const isValidUser = await page.waitForSelector("._ak1r", {
+      //   timeout: 16000,
+      // });
+
+      // if (!isValidUser) {
+      //   throw new Error("Nomor WhatsApp tidak valid atau tidak terdaftar");
+      // }
 
       const minDelay = parseInt(process.env.MIN_DELAY) || 20000;
       const maxDelay = parseInt(process.env.MAX_DELAY) || 40000;
@@ -86,6 +110,7 @@ export const initializeCluster = async () => {
         throw new Error("Page has been closed unexpectedly.");
       }
     } catch (error) {
+      console.log(error);
       console.log("Error in cluster task:", error.message);
       return {
         status: "error",
