@@ -61,7 +61,7 @@ export const initializeCluster = async () => {
       for (let i = 0; i < maxRetries; i++) {
         try {
           isValidUser = await page.waitForSelector("._ak1r", {
-            timeout: 8000,
+            timeout: 16000,
           });
           if (isValidUser) {
             break; // Break the loop if the selector is found
@@ -160,6 +160,23 @@ export const addUrlsToQueue = async (messages) => {
         recipient: recipient,
         message: message,
         error: "Gagal mengirim pesan karena no WA tidak terdaftar",
+      });
+    }
+    if (
+      result.message.includes(
+        "Selector '._ak1r' not found after maximum retries"
+      )
+    ) {
+      results.push({
+        recipient,
+        status: "Gagal mengirim pesan karena no WA tidak terdaftar",
+      });
+      logger.error(`Failed to send message`, {
+        sentStatus: "failed",
+        recipient: recipient,
+        message: message,
+        error:
+          "Gagal mengirim pesan karena no WA tidak terdaftar, saat 3x pengiriman",
       });
     } else {
       results.push({ recipient, status: result.message });
